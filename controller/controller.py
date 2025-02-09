@@ -22,33 +22,33 @@ class Controller:
     def solve_tsp(self):
         route, distance, time = self.solver.solve_tsp()
         if route:
-            self.view.animate_solution(route, self.city.get_coordinates())  # Enviar solo los datos necesarios
+            self.view.animate_solution(route, self.city.get_coordinates(), distance, time)  # Enviar solo los datos necesarios
             print(f"Ruta: {route}, Distancia: {distance:.2f}, Tiempo estimado: {time:.2f} horas")
         else:
-            print("No hay puntos para calcular")
+            self.view.show_message("No hay puntos para calcular")
 
     def solve_local_search(self):
         route, distance, time = self.solver.solve_local_search()
         if route:
-            self.view.animate_solution(route, self.city.get_coordinates())
+            self.view.animate_solution(route, self.city.get_coordinates(), distance, time)
             print(f"Ruta: {route}, Distancia: {distance:.2f}, Tiempo estimado: {time:.2f} horas")
         else:
-            print("No hay puntos para calcular")
+            self.view.show_message("No hay puntos para calcular")
 
     def solve_genetic(self):
         route, distance, time = self.solver.solve_genetic()
         if route:
-            self.view.animate_solution(route, self.city.get_coordinates())
+            self.view.animate_solution(route, self.city.get_coordinates(), distance, time)
             print(f"Ruta: {route}, Distancia: {distance:.2f}, Tiempo estimado: {time:.2f} horas")
         else:
-            print("No hay puntos para calcular")
+            self.view.show_message("No hay puntos para calcular")
 
     def solve_mst(self):
         route, distance, time = self.solver.solve_mst()
         if route:
-            self.view.animate_solution(route, self.city.get_coordinates())
+            self.view.animate_solution(route, self.city.get_coordinates(), distance, time)
             print(f"Ruta: {route}, Distancia: {distance:.2f}, Tiempo estimado: {time:.2f} horas")
         else:
-            print("No hay puntos para calcular")
+            self.view.show_message("No hay puntos para calcular")
 
     
