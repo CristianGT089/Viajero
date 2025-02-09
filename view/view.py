@@ -48,12 +48,6 @@ class View:
         for x, y in coordinates:
             self.canvas.create_oval(x-3, y-3, x+3, y+3, fill="red")
 
-    def update_solution(self, path):
-        for i in range(len(path) - 1):
-            x1, y1 = path[i]
-            x2, y2 = path[i+1]
-            self.canvas.create_line(x1, y1, x2, y2, fill="blue", width=2)
-
     def animate_solution(self, path, spots):
         fig, ax = plt.subplots(figsize=(self.img_width / 100, self.img_height / 100))  # Mantiene la proporción
 

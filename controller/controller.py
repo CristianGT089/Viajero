@@ -20,19 +20,35 @@ class Controller:
         self.view.update_canvas(self.city.get_coordinates())  # Enviar solo datos, no el objeto
 
     def solve_tsp(self):
-        solution = self.solver.solve_tsp()
-        self.view.animate_solution(solution, self.city.get_coordinates())  # Enviar solo los datos necesarios
+        route, distance, time = self.solver.solve_tsp()
+        if route:
+            self.view.animate_solution(route, self.city.get_coordinates())  # Enviar solo los datos necesarios
+            print(f"Ruta: {route}, Distancia: {distance:.2f}, Tiempo estimado: {time:.2f} horas")
+        else:
+            print("No hay puntos para calcular")
 
     def solve_local_search(self):
-        solution = self.solver.solve_local_search()
-        self.view.animate_solution(solution, self.city.get_coordinates())
+        route, distance, time = self.solver.solve_local_search()
+        if route:
+            self.view.animate_solution(route, self.city.get_coordinates())
+            print(f"Ruta: {route}, Distancia: {distance:.2f}, Tiempo estimado: {time:.2f} horas")
+        else:
+            print("No hay puntos para calcular")
 
     def solve_genetic(self):
-        solution = self.solver.solve_genetic()
-        self.view.animate_solution(solution, self.city.get_coordinates())
+        route, distance, time = self.solver.solve_genetic()
+        if route:
+            self.view.animate_solution(route, self.city.get_coordinates())
+            print(f"Ruta: {route}, Distancia: {distance:.2f}, Tiempo estimado: {time:.2f} horas")
+        else:
+            print("No hay puntos para calcular")
 
     def solve_mst(self):
-        solution = self.solver.solve_mst()
-        self.view.animate_solution(solution, self.city.get_coordinates())
+        route, distance, time = self.solver.solve_mst()
+        if route:
+            self.view.animate_solution(route, self.city.get_coordinates())
+            print(f"Ruta: {route}, Distancia: {distance:.2f}, Tiempo estimado: {time:.2f} horas")
+        else:
+            print("No hay puntos para calcular")
 
     

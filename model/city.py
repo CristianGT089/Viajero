@@ -1,6 +1,5 @@
 import random
 
-
 class City:
     def __init__(self, width=800, height=600, num_spots=20):
         self.width = width
