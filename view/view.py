@@ -1,6 +1,9 @@
 from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import messagebox
+import networkx as nx
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 class View:
     def __init__(self, master, controller):
@@ -50,6 +53,32 @@ class View:
             x1, y1 = path[i]
             x2, y2 = path[i+1]
             self.canvas.create_line(x1, y1, x2, y2, fill="blue", width=2)
+
+    def animate_solution(self, path, spots):
+        fig, ax = plt.subplots(figsize=(self.img_width / 100, self.img_height / 100))  # Mantiene la proporción
+
+        bg_image = plt.imread("map.png")  # Carga la imagen sin rotarla
+        ax.imshow(bg_image, extent=[0, self.img_width, 0, self.img_height])  
+
+        graph = nx.Graph()
+        pos = {i: (spots[i][0], self.img_height - spots[i][1]) for i in range(len(spots))}  # Invertir Y
+
+        nx.draw(graph, pos, with_labels=True, node_color='lightblue', node_size=500, ax=ax)
+
+        edges = []
+        def update(frame):
+            if frame > 0:
+                u, v = path[frame-1], path[frame]
+                graph.add_edge(u, v)
+                edges.append((u, v))
+            ax.clear()
+            ax.imshow(bg_image, extent=[0, self.img_width, 0, self.img_height])  
+            nx.draw(graph, pos, with_labels=True, node_color='lightblue', node_size=500, ax=ax)
+            nx.draw_networkx_edges(graph, pos, edgelist=edges, edge_color='red', width=2, ax=ax)
+
+        ani = animation.FuncAnimation(fig, update, frames=len(path), interval=500, repeat=False)
+        plt.title("Ruta Óptima del Viajante")
+        plt.show()
 
     def show_message(self, message):
         messagebox.showinfo("Información", message)
